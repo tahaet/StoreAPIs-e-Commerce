@@ -20,9 +20,9 @@ namespace StoreAPIs.Service
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly AppDbContext db;
         private readonly IJwtTokenGenerator jwtTokenGenerator;
-		private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-		public AuthService(
+        public AuthService(
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
             AppDbContext db,
@@ -34,8 +34,8 @@ namespace StoreAPIs.Service
             this.roleManager = roleManager;
             this.db = db;
             this.jwtTokenGenerator = jwtTokenGenerator;
-			this.httpContextAccessor = httpContextAccessor;
-		}
+            this.httpContextAccessor = httpContextAccessor;
+        }
 
         public async Task<bool> AssignRole(string email, string roleName)
         {
@@ -55,7 +55,7 @@ namespace StoreAPIs.Service
             return false;
         }
 
-			public async Task<LoginResponseDto> Login(UserLoginDto userLoginDto)
+        public async Task<LoginResponseDto> Login(UserLoginDto userLoginDto)
         {
             var user = db.ApplicationUsers.FirstOrDefault(x =>
                 x.Email.ToLower() == userLoginDto.Email.ToLower()
@@ -84,13 +84,7 @@ namespace StoreAPIs.Service
             return loginResponseDto;
         }
 
-		public async Task<bool> Logout()
-		{
-            await httpContextAccessor.HttpContext.SignOutAsync();
-            return true;
-		}
-
-		public async Task<string> Register(AdminUserRegisterDto userRegisterDto)
+        public async Task<string> Register(AdminUserRegisterDto userRegisterDto)
         {
             var ApplicationUser = new ApplicationUser();
 
